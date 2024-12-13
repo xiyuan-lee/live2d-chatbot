@@ -13,8 +13,11 @@ A live2D Chatbot Demo build with python and js.
 
 见：chatbot_demo.py
 ``` py
-access_token = "浏览器访问https://chat.openai.com/api/auth/session获取"
-conversation_id = "xxxxxxx-xxxx-xxxx-xxx-xxxxxxxxxxxx"
+
+API_KEY = "USE YOUR OWN OPENAI API KEY"
+BASE_URL = "USE YOUR OWN BASE URL"
+MODEL_NAME = "CHOOSE YOUR MODEL"
+
 ```
 
 

@@ -1,22 +1,44 @@
 from pyutils.live2d_control import tts_and_play_audio
 import warnings
+
 warnings.filterwarnings("ignore")
 
-from revChatGPT.V1 import Chatbot
 
-access_token = "浏览器访问https://chat.openai.com/api/auth/session获取"
-conversation_id = ""
+from openai import OpenAI
 
-chatbot = Chatbot(config={"access_token": access_token}, conversation_id=conversation_id)
+API_KEY = "USE YOUR OWN OPENAI API KEY"
+BASE_URL = "USE YOUR OWN BASE URL"
+MODEL_NAME = "CHOOSE YOUR MODEL"
 
-def ask(prompt):
-    for data in chatbot.ask(prompt):
-        response = data["message"]
-    return response
+
+def call_model(query):
+    client = OpenAI(
+        api_key=API_KEY,
+        base_url=BASE_URL,
+    )
+    response = client.chat.completions.create(
+        model=MODEL_NAME,
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant",
+            },
+            {
+                "role": "user",
+                "content": query,
+            },
+        ],
+        max_tokens=4096,
+        temperature=0,
+        frequency_penalty=1,
+        presence_penalty=1,
+        stream=False,
+    )
+    return response.choices[0].message.content
+
 
 while True:
     q = input("输入问题:")
-    res = ask(q)
+    res = call_model(q)
     print(res)
     tts_and_play_audio(res)
-    

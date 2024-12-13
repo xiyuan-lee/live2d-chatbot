@@ -1,6 +1,6 @@
-gtts
 librosa
 pygame
 numpy
 flask
-revChatGPT
+openai
+edge_tts
